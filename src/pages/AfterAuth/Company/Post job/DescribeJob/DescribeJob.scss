@@ -1,0 +1,85 @@
+//
+
+.describe_main {
+  display: block;
+  p {
+    margin: 10px 0;
+  }
+  .textArea {
+    width: 97%;
+    border: 1px solid #808080;
+    outline: none;
+    background: #ffffff;
+    border-radius: 12px;
+    height: 70px;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 20px;
+    resize: none;
+  }
+  .file {
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    .backBtn {
+      border: none;
+    }
+    .backBtn:hover {
+      border: 1px solid #1d71b8;
+    }
+    .nextBtn:hover {
+      background-color: #1d71b8;
+      color: #ffffff;
+    }
+    button {
+      border: 1px solid #1d71b8;
+      border-radius: 8px;
+      font-style: normal;
+      font-weight: 500;
+        font-size: 1.3vw;
+      line-height: 24px;
+      color: #323232;
+      background: #ffffff;
+      padding: 0.5vw 1vw;
+      margin-top: 3rem;
+      margin-left: 10px;
+    }
+  }
+
+    .inputFile{
+        display: none;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        height: 100px;
+        border: 1px dashed #1D71B8;
+        border-radius: 12px;
+    .inputFileUpload{
+        display:none ;
+    }
+    .inpSpan{
+        color: #1D71B8;
+        cursor: pointer;
+        &::selection{
+            background-color: transparent;
+        }
+    }
+    }
+}
+
+
+.mantine-MultiSelect-defaultValue,
+.mantine-MultiSelect-value,
+.mantine-fqghar {
+  padding: 6px 10px !important;
+  color: white !important;
+  background-color: #1d71b8 !important;
+}
+.mantine-bebgsr{
+    color:white;
+}

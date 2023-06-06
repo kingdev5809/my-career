@@ -1,0 +1,497 @@
+.talantsDesc {
+  width: 65%;
+
+  .namePro {
+    h3 {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      color: #323232;
+      display: flex;
+      align-items: center;
+    }
+    img {
+      height: 100%;
+      margin-left: 3px;
+    }
+  }
+  .namePro .userPro {
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+    margin-top: 5px;
+  }
+
+  .talantsCard {
+    .talantsSearch {
+      .talantsSearchForm {
+        max-width: 100%;
+        border-radius: 12px;
+        min-height: 54px;
+        font-size: 15px;
+        display: flex;
+        position: relative;
+
+        input {
+          background: transparent;
+          border: 1px solid #1d71b8;
+          border-radius: 8px;
+          padding-left: 18px;
+          width: 100%;
+        }
+
+        button {
+          position: absolute;
+          right: 0;
+          border: none;
+          background-color: #1d71b8;
+          border-radius: 8px;
+          width: 90px;
+          display: inline-block;
+          min-height: 100%;
+          img {
+            margin-bottom: -5px;
+          }
+        }
+      }
+    }
+
+    .talantsDescCard {
+      padding: 0 3px;
+      margin-top: 20px;
+      height: 522px;
+      overflow-y: scroll;
+      overflow-x: auto;
+      display: grid;
+      gap: 10px;
+      border-radius: 12px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .talantsDescItem {
+      width: 100%;
+      height: auto;
+      background: #ffffff;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      padding: 10px 20px 20px 20px;
+
+      .talantsLine {
+        min-height: 54px;
+        opacity: 0.5;
+        border-left: 1px solid #cdcdcd;
+      }
+
+      .talantsDescItemHeader {
+        width: 100%;
+        height: 94px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          font-family: "Montserrat", sans-serif;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 20px;
+          text-align: center;
+          color: #323232;
+        }
+
+        span {
+          font-family: "Montserrat", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 20px;
+          text-align: center;
+          color: #808080;
+        }
+
+        .imgName {
+          position: relative;
+          display: flex;
+          gap: 15px;
+          align-items: center;
+
+          & > img {
+            width: 54px;
+            height: 54px;
+            object-fit: cover;
+          }
+
+          .namePro {
+            font-size: 20px;
+            margin-left: 0.5rem;
+          }
+        }
+
+        .liked {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #fff;
+          box-shadow: 0px 0px 10px rgba(29, 113, 184, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          align-self: flex-start;
+          justify-self: flex-end;
+          margin-top: 15px;
+
+          .bsheart {
+            //margin: 6px 0 0 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: 20px;
+            height: 18px;
+            font-weight: 600;
+            color: #1d71b8;
+          }
+
+          .bsheartfill {
+            cursor: pointer;
+            width: 20px;
+            height: 18px;
+            font-weight: 600;
+            color: #1d71b8;
+          }
+        }
+
+        .jobSuccess {
+          & > p {
+            font-size: 18px;
+            line-height: 24px;
+          }
+
+          & > span {
+            font-size: 14px;
+            line-height: 20px;
+            display: inline-block;
+            margin-top: 4px;
+          }
+
+          .blueLine {
+            margin-top: 3px;
+            margin-bottom: 4px;
+            position: relative;
+
+            .blueLine1 {
+              position: absolute;
+              top: -1px;
+              width: 100%;
+              height: 3px;
+              background: #cdcdcd;
+              border-radius: 5px;
+            }
+
+            .blueLine2 {
+              position: absolute;
+              top: -1px;
+              z-index: 3;
+              width: 80%;
+              height: 3px;
+              background: #1d71b8;
+              border-radius: 5px;
+            }
+          }
+        }
+
+        .hourRate {
+          & > p {
+            font-size: 20px;
+            line-height: 28px;
+          }
+
+          & > span {
+            font-size: 14px;
+            line-height: 20px;
+            display: inline-block;
+            margin-top: 5px;
+          }
+        }
+
+        .completedJobs {
+          & > p {
+            font-size: 20px;
+            line-height: 28px;
+          }
+
+          & > span {
+            font-size: 14px;
+            line-height: 20px;
+            display: inline-block;
+            margin-top: 5px;
+          }
+        }
+      }
+
+      .blockLine {
+        width: 100%;
+        margin: 5px 0px 0px 10px;
+        opacity: 0.5;
+        border-bottom: 2px solid #cdcdcd;
+        margin: auto;
+      }
+
+      /*---------------Description----------*/
+      .description {
+        position: relative;
+        width: 100%;
+        min-height: 44px;
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+        margin: 10px;
+        cursor: pointer;
+
+        .descContent {
+          height: 44px;
+          overflow: hidden;
+          font-size: 15px;
+          line-height: 22px;
+          max-width: 800px;
+          font-weight: 400;
+          padding-right: 30px;
+          scroll-behavior: auto;
+        }
+
+        .faChevronDown {
+          position: absolute;
+          top: 50%;
+          right: 20px;
+          transform: translateY(-50%);
+          width: 11px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+
+      .skills {
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        p {
+          margin-left: 5px;
+          display: flex;
+          gap: 10px;
+          padding: 0;
+
+          span {
+            cursor: pointer;
+            padding: 6px 10px;
+            background: #fff;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 22px;
+            color: #1d71b8;
+          }
+        }
+
+        .selectLevel {
+          & > label {
+            font-size: 16px;
+            line-height: 22px;
+            color: #808080;
+          }
+
+          select {
+            border: none;
+            outline: none;
+            padding: 0px 5px 0px 0px;
+            margin-right: 10px;
+            font-family: "Motserrat", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .expLocation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-left: 5px;
+
+        .exp {
+          display: flex;
+          align-items: center;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 14px;
+          color: #808080;
+          line-height: 20px;
+
+          span {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #1d71b8;
+            line-height: 20px;
+          }
+        }
+
+        .location {
+          display: flex;
+          align-items: center;
+          margin-right: 10px;
+          font-size: 14px;
+          gap: 0.5rem;
+          justify-content: flex-end;
+          line-height: 20px;
+          color: #808080;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1756px) {
+  .talantsDesc {
+    .talantsCard {
+      .talantsDescCard {
+        height: 454px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1456px) {
+  .talantsDesc {
+    .talantsCard {
+      .talantsDescCard {
+        height: 368px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1386px) {
+  .talantsDesc {
+    .talantsCard {
+      .talantsSearch {
+        .talantsSearchForm {
+          min-height: 45px;
+
+          button {
+            img {
+              margin-bottom: -5px;
+            }
+          }
+        }
+      }
+    }
+    .namePro {
+      h3 {
+        font-size: 18px;
+      }
+      .userPro {
+        font-size: 15px;
+		margin-top: 0;
+      }
+    }
+    .talantsCard {
+      .talantsDescItem {
+        .talantsDescItemHeader {
+          .jobSuccess,
+          .completedJobs,
+          .hourRate {
+            p {
+              font-size: 15px;
+            }
+            span {
+              font-size: 12px;
+            }
+          }
+        }
+        .skills {
+          p {
+            span {
+              font-size: 11px;
+            }
+          }
+          .selectLevel {
+            select,
+            label {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1236px) {
+	.talantsDesc {
+	  .talantsCard {
+		.talantsSearch {
+		  .talantsSearchForm {
+			min-height: 45px;
+  
+			button {
+			  img {
+				margin-bottom: -5px;
+			  }
+			}
+		  }
+		}
+	  }
+	  .namePro {
+		h3 {
+		  font-size: 16px;
+		}
+		.userPro {
+		  font-size: 13px;
+		}
+	  }
+	  .talantsCard {
+		.talantsDescItem {
+		  .talantsDescItemHeader {
+			.jobSuccess,
+			.completedJobs,
+			.hourRate {
+			  p {
+				font-size: 13px;
+			  }
+			  span {
+				font-size: 11px;
+			  }
+			}
+		  }
+		  .skills {
+			p {
+			  span {
+				font-size: 12px;
+			  }
+			}
+			.selectLevel {
+			  select,
+			  label {
+				font-size: 14px;
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  }
+  

@@ -1,0 +1,46 @@
+
+
+
+
+
+.title_main{
+    height:320px;       
+    input{
+        padding: 10px 16px;
+        width: 94%;
+        background: #FFFFFF;
+        border: 1px solid #CDCDCD;
+        border-radius: 8px;
+        font-family: "Montserrat";
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #808080;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+    .selectOptions{
+        margin-top:8px;
+    }
+    .buttons{
+        display: flex;
+        justify-content: flex-end;
+    }
+    button{
+        border: 1px solid #1d71b8 !important;
+        border: none;
+        border-radius: 8px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.3vw;
+        line-height: 24px;
+        color: #323232;
+        background: #ffffff;
+      padding: 0.5vw 1vw;
+        margin-top: 3rem;
+    }
+    button:hover{
+        background-color: #1d71b8;
+        color:#FFFFFF
+    }
+}

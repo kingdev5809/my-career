@@ -1,0 +1,68 @@
+.terms_main{
+    p{
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    input{
+        background: #FFFFFF;
+        border: 1px solid #CDCDCD;
+        border-radius: 8px;
+        font-family: "Montserrat";
+        font-weight: 500;
+        font-size: 20px;
+        padding: 16px 0px;
+        line-height: 24px;
+        color: #808080;
+        /* margin-top: 8px; */
+        margin-bottom: 16px;
+        padding-left: 8px;
+
+    }
+    .select_checkbox{
+        display: flex;
+        input{
+            font-size: 2vw;
+            width: 1.1vw;
+            height: 1.1vw;
+        }
+        span{
+            margin:0 3px;
+            font-size: 1.2vw;
+        }
+        div{
+            margin-left: 10px;
+        }
+    }
+    .select_hourly{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap:22px;
+    }
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    .backBtn{
+        border: none;
+    }
+    .backBtn:hover{
+    border: 1px solid #1d71b8 ;
+    }
+    .nextBtn:hover{
+        background-color: #1d71b8;
+        color:#ffffff
+    }
+    button{
+        border: 1px solid #1d71b8 ;
+        border-radius: 8px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.3vw;
+        line-height: 24px;
+        color: #323232;
+        background: #ffffff;
+      padding: 0.5vw 1vw;
+        margin-top: 1rem;
+        margin-left: 10px;
+    }
+}
+}

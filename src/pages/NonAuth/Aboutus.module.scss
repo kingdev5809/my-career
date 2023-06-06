@@ -1,0 +1,153 @@
+.aboutus {
+  padding-top: 50px;
+  .about__container {
+    margin-top: -62px;
+    padding: 30px;
+    height: 580px;
+    z-index: 10;
+    background: linear-gradient(
+        101.5deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(29, 113, 184, 0.2) 100%
+      ),
+      #ffffff;
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.15),
+      inset 0px -5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    //align-items: center;
+    gap: 20px;
+
+    &__border {
+      //height: 100%;
+      opacity: 0.3;
+      border: 1px solid #808080;
+    }
+
+    .TextsMain {
+      width: 100%;
+      max-width: 420px;
+      //height: 100%;
+      overflow: hidden;
+
+      .IconsMain {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          font-weight: 700;
+          font-size: 2vw;
+          line-height: 37px;
+          color: #323232;
+          margin-bottom: 10px;
+        }
+
+        .iconsBlock {
+          display: flex;
+          align-items: center;
+          gap: 28px;
+
+          svg {
+            width: 24px;
+            height: 24px;
+            color: #1d71b8;
+          }
+        }
+      }
+    }
+
+    .text {
+      //margin: 15px 0 18px;
+      //max-height: 502px;
+      font-weight: 500;
+      font-size: 1.3vw;
+      line-height: 24px;
+      //text-align: justify;
+      color: #323232;
+      overflow: scroll;
+
+      .block {
+        display: block;
+        margin: 10px 0;
+      }
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1500px) {
+  .aboutus {
+    .about__container {
+      .text {
+        font-size: 20px;
+      }
+    }
+  }
+}
+@media only screen and (max-height: 850px) {
+  .aboutus {
+    padding-top: 40px;
+
+    .about__container {
+      padding: 20px;
+      height: 480px;
+
+      .text {
+        max-height: 430px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .aboutus {
+    padding-top: 35px;
+
+    .about__container {
+      height: 506px;
+
+      .text {
+        max-height: 372px;
+      }
+
+      .TextsMain {
+        max-width: 370px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-height: 670px) {
+  .aboutus {
+    padding-top: 20px;
+
+    .about__container {
+      padding: 20px 30px;
+      height: 426px;
+
+      .text {
+        max-height: 379px;
+        font-size: 15px;
+        line-height: 20px;
+      }
+
+      .TextsMain {
+        max-width: 320px;
+
+        .IconsMain {
+          p {
+            font-weight: 700;
+          }
+
+          .iconsBlock {
+            display: flex;
+            gap: 20px;
+          }
+        }
+      }
+    }
+  }
+}

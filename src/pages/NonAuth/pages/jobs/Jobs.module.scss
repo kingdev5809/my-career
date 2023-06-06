@@ -1,0 +1,51 @@
+html {
+	scroll-behavior: smooth;
+}
+
+.jobs {
+	padding-top: 25px;
+	.jobs__container {
+		width: 100%;
+		padding: 40px 30px 0 40px;
+		z-index: 10;
+		background: linear-gradient(101.5deg, rgba(255, 255, 255, 0.2) 0%, rgba(29, 113, 184, 0.2) 100%), #ffffff;
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), inset 0px -5px 10px rgba(0, 0, 0, 0.1);
+		border-radius: 12px;
+		display: flex;
+		gap: 30px;
+	}
+}
+
+@media only screen and (max-width: 1756px) {
+	.jobs {
+		.jobs__container {
+			height: 566px;
+			overflow: hidden;
+		}
+	}
+}
+
+@media only screen and (max-width: 1456px) {
+	.jobs {
+
+		.jobs__container {
+			height: 466px;
+		}
+	}
+}
+
+@media only screen and (max-width: 1356px) {
+	.jobs {
+		.jobs__container {
+			height: 446px;
+		}
+	}
+}
+
+@media only screen and (max-height: 816px) {
+	.jobs {
+		.jobs__container {
+			padding: 30px 20px 0 30px;
+		}
+	}
+}
