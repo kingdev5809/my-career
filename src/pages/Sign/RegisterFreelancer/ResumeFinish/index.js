@@ -11,8 +11,8 @@ import {
   getFreelancer,
   experienceGet,
   educationGet,
-  getUserlang,
   languages,
+  getUserLanguage,
 } from "reduxToolkit/extraReducers";
 import Resume1 from "./complate-resume/resume-list/Resume1";
 import Resume2 from "./complate-resume/resume-list/Resume2";
@@ -27,10 +27,12 @@ import { forEach, forEachRight } from "lodash";
 const ReumeFinish = () => {
   // const resumeDetails = useSelector(state => state.resume.resumeDetails)
 
-  const { freelancerLoading, languageList } = useSelector((state) => state.resume);
+  const { freelancerLoading, languageList } = useSelector(
+    (state) => state.resume
+  );
   const loading = useSelector((state) => state.resume.loading);
   const experiences = useSelector((state) => state.resume.experienceList);
-  const { skillsData, freelancerData, userLang } = useSelector(
+  const { skillsData, freelancerData, userLanguages } = useSelector(
     (state) => state.frilanserCardSlice
   );
 
@@ -55,30 +57,29 @@ const ReumeFinish = () => {
     { name: "Native", level: 5 },
   ];
 
-
   useEffect(() => {
     var arr = [];
-    userLang?.forEach(ulang => {
+    userLanguages?.forEach((ulang) => {
       const lang = languageList.find((lang) => ulang.languageId == lang.id);
-      console.log(lang)
+      console.log(lang);
       const level = levels.find((level) => ulang.level == level.level);
       arr.push({
         language: lang ? lang.name : null,
         level: level ? level.name : null,
       });
     });
-    setLanguageNames(arr)
-  }, [languageList, userLang,])
-  const [freeLancerAddress, setFreelancerAddress] = useState()
+    setLanguageNames(arr);
+  }, [languageList, userLanguages]);
+  const [freeLancerAddress, setFreelancerAddress] = useState();
   useEffect(() => {
     dispatch(experienceGet());
-    dispatch(educationGet())
-    dispatch(getUserlang())
-    dispatch(languages())
+    dispatch(educationGet());
+    dispatch(getUserLanguage());
+    dispatch(languages());
 
-    var countryName = JSON.parse(localStorage.getItem("country"))
-    if(countryName){
-      setFreelancerAddress(countryName)
+    var countryName = JSON.parse(localStorage.getItem("country"));
+    if (countryName) {
+      setFreelancerAddress(countryName);
     }
   }, []);
 
@@ -207,7 +208,7 @@ const ReumeFinish = () => {
   };
 
   const handleClick = () => {
-    localStorage.removeItem('resumeId')
+    localStorage.removeItem("resumeId");
     dispatch(
       activeDoteAction([
         { id: 1, label: "Personal information" },
@@ -235,7 +236,7 @@ const ReumeFinish = () => {
                   onClick={handleClick}
                 >
                   <img src={arrowLeft} alt="Arrov left" />
-                  <span >Back</span>
+                  <span>Back</span>
                 </button>
               </div>
               <div className={classes.resume__finish_main}>

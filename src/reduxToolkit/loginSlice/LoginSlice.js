@@ -1,41 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   logInRequest,
   registerRequest,
   resumeFinishPost,
-} from 'reduxToolkit/extraReducers';
+} from "reduxToolkit/extraReducers";
 const initialState = {
   loading: false,
-  error: '',
-  loginOnSuccess: '',
-  loggedIn: localStorage.getItem('token'),
-  freelancerOrCompony: localStorage.getItem('type')
-    ? localStorage.getItem('type')
+  error: "",
+  loginOnSuccess: "",
+  loggedIn: localStorage.getItem("token"),
+  freelancerOrCompony: localStorage.getItem("type")
+    ? localStorage.getItem("type")
     : false,
   checkEmail: false,
-  bodyErrors: '',
+  bodyErrors: "",
   loginResponseError: null,
-  resumeOnSuccess: '',
+  resumeOnSuccess: "",
 };
 
 /////////erlan\\\\\\\\\\
 
 const logInSlice = createSlice({
-  name: 'loginRegister',
+  name: "loginRegister",
   initialState,
   reducers: {
     removeToken: (state, { type, payload }) => {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       state.loggedIn = null;
     },
     resumeFinish: (state, { type, payload }) => {
-      localStorage.setItem('resume', payload);
+      localStorage.setItem("resume", payload);
       state.resume = payload;
     },
-    removeCheckEmail: state => {
+    removeCheckEmail: (state) => {
       state.checkEmail = null;
     },
-    profilLogout: state => {
+    profilLogout: (state) => {
       localStorage.clear();
       state.resume = null;
       state.loggedIn = null;
@@ -44,11 +44,11 @@ const logInSlice = createSlice({
     },
     changeRoleWhenFinished: (state, { payload }) => {
       state.freelancerOrCompony = payload;
-      localStorage.setItem('type', payload);
+      localStorage.setItem("type", payload);
     },
   },
 
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     /////////////CLAIMS REDUCER/////////////////
     // builder.addCase(claimsGet.pending, (state, action) => {
     // 	state.loading = true;
@@ -67,7 +67,7 @@ const logInSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(logInRequest.fulfilled, (state, action) => {
-      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem("token", action.payload.token);
       state.loggedIn = action.payload.token;
       state.loading = false;
       state.loginOnSuccess = true;
@@ -75,7 +75,7 @@ const logInSlice = createSlice({
     builder.addCase(logInRequest.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-      state.loginResponseError = 'Email or password incorrect';
+      state.loginResponseError = "Email or password incorrect";
     });
 
     ///////////////////REGISTER REDUCER////////////////
@@ -89,7 +89,7 @@ const logInSlice = createSlice({
     builder.addCase(registerRequest.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-      state.bodyErrors = 'This email is already taken.';
+      state.bodyErrors = "This email is already taken.";
     });
 
     ///////////////////USERROLES REDUCER/////////////////

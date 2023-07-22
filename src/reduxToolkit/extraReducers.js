@@ -399,6 +399,15 @@ export const getUserLanguage = createAsyncThunk(
   }
 );
 
+export const deleteUserLanguageWithId = createAsyncThunk(
+  "deleteUserLanguageWithId",
+  async (langId) => {
+    return axios({
+      method: "DELETE",
+      url: USERLANGUAGE + "/" + langId,
+    }).then((res) => res.data);
+  }
+);
 ///////////////////////////CONTACTUPLOAD PUT///////////////////
 export const contactUpload = createAsyncThunk(
   "token/contactUpload",

@@ -23,13 +23,11 @@ const initialState = {
 function Language() {
   const dispatch = useDispatch();
   const languageList = useSelector((state) => state.resume.languageList);
-  const [theArray, setTheArray] = useState([]);
   const [userLang, setUserLang] = useState([]);
-  const [userLevel, setUserLevel] = useState([]);
-  const [disabledlanguageList, setDisabledlanguageList] = useState(
-    languageList
-  );
+  const [allLang, setAllLang] = useState([]);
   const [langs, setLangs] = useState([initialState]);
+  const [selectedLang, setSelectedLang] = useState(null);
+
   const [lanId, setLanId] = useState(null);
   const [lanLevel, setLanLevel] = useState("");
 
@@ -42,25 +40,54 @@ function Language() {
     { value: "Native", label: "C2 - Native" },
   ];
 
-
-
   let singleLang = true;
   if (langs.length > 1) {
     singleLang = false;
   }
 
-  const removeLang = (id) => {
+  useEffect(() => {
+    dispatch(languages());
+    var dotAction = JSON.parse(localStorage.getItem("activeDoteAction"));
+    if (dotAction) {
+      dispatch(activeDoteAction(dotAction));
+    }
+  }, []);
+
+  useEffect(() => {
+    setAllLang(languageList);
+  }, [languageList]);
+
+  const removeLang = (lang) => {
+    console.log(lang);
     let newLang = [];
     for (let i = 0; i < langs.length; i++) {
-      if (langs[i].id !== id) {
+      if (langs[i].id !== lang.id) {
         newLang.push(langs[i]);
+      }
+    }
+    for (let i = 0; i < languageList.length; i++) {
+      const element = languageList[i];
+      if (element.id === lang.languageId) {
+        // if (!Object.values(allLang.includes(lang.languageId))) {
+        setAllLang((prev) => [...prev, element]);
+        setSelectedLang(true);
+        console.log(element);
+        // }
       }
     }
     setLangs(newLang);
   };
+  console.log(allLang);
 
   const handleLanguage = () => {
-    setLangs((prev) => [...prev, { ...initialState, id: Date.now() }]);
+    if (selectedLang) {
+      setLangs((prev) => [...prev, { ...initialState, id: Date.now() }]);
+      if (allLang.length > 0) {
+        setAllLang(allLang.filter((el) => el.id !== selectedLang));
+      } else {
+        setAllLang(languageList.filter((el) => el.id !== selectedLang));
+      }
+    }
   };
 
   const handleSubmit = (event) => {
@@ -94,21 +121,9 @@ function Language() {
     );
   };
 
-  useEffect(() => {
-    dispatch(languages());
-    var dotAction = JSON.parse(localStorage.getItem("activeDoteAction"));
-    if (dotAction) {
-      dispatch(activeDoteAction(dotAction));
-    }
-  }, []);
-
   const addLanguage = ({ id, value, type, choice }) => {
-    const res = languageList.filter((el) => el.id !== choice?.value);
-    if (res) {
-      setUserLang(res);
-      setDisabledlanguageList(res)
-    } else {
-      setUserLang(disabledlanguageList)
+    if (type === "languageId") {
+      setSelectedLang(choice?.value);
     }
     const newLangs = langs.map((el) => {
       if (el.id === id) {
@@ -119,9 +134,10 @@ function Language() {
       }
       return el;
     });
+
     setLangs(newLangs);
   };
-  
+
   return (
     <div className={classes.languageCard}>
       <h2>Write what languages you speak</h2>
@@ -144,7 +160,7 @@ function Language() {
             >
               <Select
                 className="languageSelect"
-                options={disabledlanguageList.length? disabledlanguageList :languageList.map((el) => ({
+                options={allLang.map((el) => ({
                   value: el.id,
                   label: el.name,
                 }))}
@@ -176,7 +192,7 @@ function Language() {
               {!singleLang && (
                 <div
                   className={classes.cancelLang}
-                  onClick={() => removeLang(lang.id)}
+                  onClick={() => removeLang(lang)}
                 >
                   <img src={cancel} alt="cancel" />
                 </div>

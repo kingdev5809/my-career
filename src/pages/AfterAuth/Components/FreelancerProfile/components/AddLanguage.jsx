@@ -5,6 +5,7 @@ import Select from "react-select";
 import "./AddLanguage.scss";
 import cancel from "../../../../../assets/images/Resume/cancel.png";
 import {
+  deleteUserLanguageWithId,
   getUserLanguage,
   languages,
   postUserLanguage,
@@ -18,46 +19,85 @@ const initialState = {
 function AddLanguage({ setActiveModal }) {
   const dispatch = useDispatch();
   const languageList = useSelector((state) => state.resume.languageList);
-  const userLanguages = useSelector(
-    (state) => state.frilanserCardSlice.userLanguages
+  const { userLanguages, deleteAction } = useSelector(
+    (state) => state.frilanserCardSlice
   );
   const [userLang, setUserLang] = useState([]);
   const [allLang, setAllLang] = useState([]);
   const [langs, setLangs] = useState([initialState]);
   const [selectedLang, setSelectedLang] = useState(null);
-  let level = [
-    { value: "Beginner", label: "A1 - Beginner" },
-    { value: "Elementary", label: "A2 - Elementary" },
-    { value: "PreIntermediate", label: "B1 - PreIntermediate" },
-    { value: "UpperIntermediate", label: "B2 - Upper-Intermediate" },
-    { value: "Advanced", label: "C1 - Upper-Intermediate" },
+  const [singleLang, setSingleLang] = useState(true);
+  const [singleLang2, setSingleLang2] = useState(true);
+  let levels = [
+    { value: "Beginner", label: "A1 - Beginner", level: 0 },
+    { value: "Elementary", label: "A2 - Elementary", level: 1 },
+    { value: "PreIntermediate", label: "B1 - PreIntermediate", level: 2 },
+    { value: "UpperIntermediate", label: "B2 - Upper-Intermediate", level: 3 },
+    { value: "Advanced", label: "C1 - Upper-Intermediate", level: 4 },
     { value: "Native", label: "C2 - Native" },
   ];
 
-  let singleLang = true;
-  if (langs.length > 1 || userLang.length > 1) {
-    singleLang = false;
-  }
+  // get user language
 
-  const removeLang = (lang) => {
-    let newLang = [];
-    for (let i = 0; i < langs.length; i++) {
-      if (langs[i].id !== lang.id) {
-        newLang.push(langs[i]);
-      }
+  useEffect(() => {
+    let arr = [];
+    userLanguages?.forEach((ulang) => {
+      const lang = languageList?.find((lang) => ulang.languageId == lang.id);
+      const level = levels?.find((level) => ulang.level == level.level);
+      arr.push({
+        language: lang ? lang.name : null,
+        level: level ? level.label : null,
+        id: lang ? ulang.id : null,
+        languageId: lang ? lang.id : null,
+      });
+    });
+
+    if (arr.length > 0) {
+      setSingleLang2(false);
     }
-    for (let i = 0; i < languageList.length; i++) {
-      const element = languageList[i];
-      if (element.id === lang.languageId) {
-        setAllLang((prev) => [...prev, element]);
-      }
+
+    if (!userLang?.length > 0) {
+      setLangs([]);
+      setSelectedLang(true);
     }
-    setLangs(newLang);
+    setUserLang(arr);
+  }, [languageList, userLanguages]);
+
+  useEffect(() => {
+    let yFilter = userLang.map((item) => {
+      return item.language;
+    });
+    let filtered = allLang.filter((el) => !yFilter.includes(el.name));
+    setAllLang(filtered);
+  }, [userLang, languageList]);
+
+  useEffect(() => {
+    dispatch(languages());
+    dispatch(getUserLanguage());
+  }, [deleteAction]);
+
+  useEffect(() => {
+    setAllLang(languageList);
+  }, [languageList]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = langs.map((el) => ({
+      languageId: el.languageId,
+      level: el.level,
+    }));
+    dispatch(postUserLanguage(data));
+    setActiveModal(null);
   };
 
   const handleLanguage = () => {
+    if (allLang.length == 0) {
+      console.log(allLang);
+      return;
+    }
     if (selectedLang) {
       setLangs((prev) => [...prev, { ...initialState, id: Date.now() }]);
+      setSingleLang(false);
       if (allLang.length > 0) {
         setAllLang(allLang.filter((el) => el.id !== selectedLang));
       } else {
@@ -66,30 +106,6 @@ function AddLanguage({ setActiveModal }) {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = langs.map((el) => ({
-      languageId: el.languageId,
-      level: el.level,
-    }));
-    dispatch(postUserLanguage(langs));
-    console.log(data);
-    console.log(langs);
-  };
-
-  useEffect(() => {
-    dispatch(languages());
-    dispatch(getUserLanguage());
-  }, []);
-
-  useEffect(() => {
-    setAllLang(languageList);
-  }, [languageList]);
-
-  useEffect(() => {
-    // setUserLang(userLanguages);
-    // backendan langugage id kevoti faqat name kesa togirlab qoyish kere
-  }, [userLanguages]);
   const addLanguage = ({ id, value, type, choice }) => {
     if (type === "languageId") {
       setSelectedLang(choice?.value);
@@ -106,6 +122,31 @@ function AddLanguage({ setActiveModal }) {
 
     setLangs(newLangs);
   };
+
+  const removeLang = (lang, api) => {
+    let newLang = [];
+    for (let i = 0; i < langs.length; i++) {
+      console.log(lang);
+      console.log(langs[i]);
+      if (langs[i].id !== lang.id) {
+        newLang.push(langs[i]);
+      }
+    }
+    for (let i = 0; i < languageList.length; i++) {
+      const element = languageList[i];
+      if (element.id === lang.languageId) {
+        setAllLang((prev) => [...prev, element]);
+      }
+    }
+
+    setLangs(newLang);
+
+    // delete from backend
+    if (api) {
+      dispatch(deleteUserLanguageWithId(lang.id));
+    }
+  };
+
   return (
     <div className="languageCard">
       <h2>Write what languages you speak</h2>
@@ -116,7 +157,7 @@ function AddLanguage({ setActiveModal }) {
       <form action="submit" className="languageForm" onSubmit={handleSubmit}>
         <label htmlFor="languages">Language*</label>
         <div className="select_box">
-          {userLang.map((lang) => (
+          {userLang?.map((lang) => (
             <div
               key={lang.id}
               id={!singleLang ? "test" : null}
@@ -128,16 +169,24 @@ function AddLanguage({ setActiveModal }) {
                 styles={{
                   overflowX: "scroll",
                 }}
+                inputValue={lang.language}
               />
-              <Select className="languageSelect" placeholder="Level*" />
-              {!singleLang && (
-                <div className="cancelLang" onClick={() => removeLang(lang)}>
+              <Select
+                className="languageSelect"
+                placeholder="Level*"
+                inputValue={lang.level}
+              />
+              {!singleLang2 && (
+                <div
+                  className="cancelLang"
+                  onClick={() => removeLang(lang, true)}
+                >
                   <img src={cancel} alt="cancel" />
                 </div>
               )}
             </div>
           ))}
-          {langs.map((lang) => (
+          {langs?.map((lang) => (
             <div
               key={lang.id}
               id={!singleLang ? "test" : null}
@@ -164,7 +213,7 @@ function AddLanguage({ setActiveModal }) {
               />
               <Select
                 className="languageSelect"
-                options={level}
+                options={levels}
                 placeholder="Level*"
                 onChange={(choice) =>
                   addLanguage({
@@ -175,7 +224,10 @@ function AddLanguage({ setActiveModal }) {
                 }
               />
               {!singleLang && (
-                <div className="cancelLang" onClick={() => removeLang(lang)}>
+                <div
+                  className="cancelLang"
+                  onClick={() => removeLang(lang, false)}
+                >
                   <img src={cancel} alt="cancel" />
                 </div>
               )}

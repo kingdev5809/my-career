@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFreelancer, getUserLanguage } from "reduxToolkit/extraReducers";
+import {
+  deleteUserLanguageWithId,
+  getFreelancer,
+  getUserLanguage,
+} from "reduxToolkit/extraReducers";
 import defaultuserImage from "../../assets/images/Freelancer/defaultUserImage.png";
 const initialState = {
   loading: "",
@@ -8,6 +12,7 @@ const initialState = {
   skillsData: [],
   hobbiesData: [],
   userLanguages: null,
+  deleteAction: null,
   error: null,
   freelancer: {
     firstName: "",
@@ -81,6 +86,17 @@ const freelancerSlice = createSlice({
         state.userLanguages = action.payload;
       })
       .addCase(getUserLanguage.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(deleteUserLanguageWithId.pending, (state, action) => {
+        state.loading = true;
+        state.deleteAction = "pending";
+      })
+      .addCase(deleteUserLanguageWithId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.deleteAction = "success";
+      })
+      .addCase(deleteUserLanguageWithId.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
